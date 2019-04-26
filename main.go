@@ -79,7 +79,7 @@ func fetchEEPR(client *github.Client, pr github.Issue, out chan<- github.Issue) 
 				fmt.Fprintf(os.Stderr, "Error getting EE PR %d", id)
 				return
 			}
-			if eepr != nil {
+			if eepr != nil && eepr.GetState() == "open" {
 				eepr.User = pr.GetUser()
 				out <- *eepr
 			}
